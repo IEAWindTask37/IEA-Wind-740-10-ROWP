@@ -1,5 +1,5 @@
 # The IEA Wind 740-10-MW Reference Offshore Wind Plants (v0.1)
-This repository provides the data defining the IEA Wind 740-10-MW ROWPs (v0.1) which are described in detail in **this report** (published soon).
+This repository provides the data defining the IEA Wind 740-10-MW ROWPs (v0.1) which are described in detail in [this report](https://www.nrel.gov/docs/fy24osti/87923.pdf).
 The plants are located at the Borssele site approximately 40 km off the Dutch coast and aim to act as reference for future research projects on wind energy, representing modern offshore wind plants.
 Seventy-four [IEA 10-MW Reference Wind Turbines](https://github.com/IEAWindTask37/IEA-10.0-198-RWT) are arranged in two layouts that are optimized for maximum annual energy production: one regular grid layout and one irregular layout.
 For both layouts, collection system networks with minimized total cabling length are defined. 
