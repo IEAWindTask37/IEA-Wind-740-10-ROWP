@@ -26,6 +26,22 @@ regy = regular['layouts']['initial_layout']['coordinates']['y']
 irrgx = irregular['layouts']['initial_layout']['coordinates']['x']
 irrgy = irregular['layouts']['initial_layout']['coordinates']['y']
 
+# Cable and substation data
+# ToDo: Save data in separate yaml file
+CabReg = regular['electrical_collection_array']['edges']
+CabIrr = irregular['electrical_collection_array']['edges']
+
+# Extract the coordinates
+x_subs_reg = regular['electrical_substations']['coordinates']['x'][0]
+y_subs_reg = regular['electrical_substations']['coordinates']['y'][0]
+
+
+Subs = [x_subs_reg / 1000, y_subs_reg / 1000]
+
+CabCurrentReg = regular['electrical_collection_array']['cables']['current_capacity']
+
+CabName = [f'Cable I_R={current}A' for current in CabCurrentReg]
+
 # Transfer from m to km
 regx = [i /1000 for i in regx]
 regy = [i /1000 for i in regy]
@@ -44,12 +60,6 @@ for i in range(len(xi)):
         if not polygon.contains(Point(xi[i,j],yi[i,j])):
             Z[i,j] = np.nan
 
-# Cable and substation data
-# ToDo: Save data in separate yaml file
-CabReg = [(0, 2, 0), (1, 4, 0), (2, 6, 0), (3, 8, 0), (4, 5, 0), (5, 10, 0), (6, 7, 0), (7, 14, 1), (8, 9, 0), (9, 15, 0), (10, 16, 1), (11, 18, 0), (12, 13, 0), (13, 20, 0), (14, 22, 1), (15, 24, 1), (16, 17, 1), (17, 25, 2), (18, 19, 0), (19, 26, 0), (20, 21, 0), (21, 32, 1), (21, 30, 0), (22, 23, 2), (23, -1, 2), (24, 34, 1), (25, -1, 2), (26, 27, 1), (27, 36, 1), (28, 29, 0), (29, 38, 0), (29, 40, 0), (31, 44, 0), (31, 42, 0), (32, 33, 2), (33, -1, 2), (34, 46, 2), (35, -1, 2), (35, 36, 2), (37, 48, 1), (37, 38, 1), (39, 50, 1), (39, 52, 1), (41, 52, 0), (41, 54, 0), (43, 44, 0), (44, 45, 1), (45, -1, 1), (46, -1, 2), (47, -1, 2), (47, 48, 2), (49, -1, 2), (49, 50, 2), (51, 60, 1), (51, 62, 0), (53, 62, 0), (53, 64, 0), (54, 55, 0), (56, -1, 2), (56, 65, 1), (57, -1, 2), (57, 67, 2), (58, -1, 2), (58, 59, 2), (59, 60, 1), (61, 69, 0), (61, 70, 0), (63, 70, 0), (65, 66, 1), (66, 71, 0), (66, 73, 0), (67, 68, 1), (68, 69, 1), (71, 72, 0)]
-CabIrr = [(0, 50, 0), (1, 34, 0), (2, 8, 1), (2, 7, 0), (3, 12, 1), (3, 15, 0), (4, 20, 0), (5, 32, 0), (5, 9, 0), (6, 35, 0), (7, 43, 0), (8, 42, 1), (9, 19, 0), (10, 24, 0), (11, 18, 0), (12, 45, 1), (13, 26, 0), (13, 14, 0), (15, 21, 0), (16, 29, 1), (16, 17, 0), (17, 24, 0), (18, 59, 0), (20, 37, 1), (20, 34, 0), (21, 66, 0), (22, 67, 1), (22, 44, 1), (23, 43, 0), (25, -1, 2), (25, 42, 2), (26, 31, 0), (27, 52, 0), (27, 38, 0), (28, -1, 2), (28, 53, 2), (29, 53, 1), (30, 49, 2), (30, 56, 1), (31, 56, 1), (32, 68, 1), (33, -1, 2), (33, 45, 2), (35, 36, 0), (36, 62, 0), (37, 51, 1), (39, -1, 2), (39, 63, 2), (40, 55, 0), (40, 57, 0), (41, -1, 2), (41, 51, 2), (44, 46, 0), (46, 50, 0), (47, 65, 0), (48, 65, 0), (49, -1, 2), (52, 59, 0), (54, -1, 2), (54, 73, 2), (55, -1, 1), (57, 72, 0), (58, 61, 1), (58, 65, 0), (59, 60, 2), (60, -1, 2), (61, 64, 1), (62, 69, 1), (63, 69, 1), (64, 71, 2), (67, 70, 2), (68, 73, 1), (70, -1, 2), (71, -1, 2)]
-Subs = [497.6207, 5730.622] # km
-CabName = ['Cable I$_{\mathrm{R}}$=300A','Cable I$_{\mathrm{R}}$=480A','Cable I$_{\mathrm{R}}$=655A']
 
 # Create plot
 fig, ax = plt.subplots(1, 2, figsize=(6.5, 3.7), sharey=True)
@@ -137,3 +147,5 @@ ax[1].set_title('Irregular Layout\nAEP = 3429.63 GWh', pad=10, fontsize=10)
 plt.draw()
 plt.savefig('layouts.pdf', bbox_inches='tight')
 plt.subplots_adjust(left=0.087, bottom=0.035, right=0.9, top=0.955, wspace=0.075, hspace=0.2)
+
+plt.show()
